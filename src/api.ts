@@ -9,6 +9,7 @@ export type Photo = {
 const API_BASE = "https://jsonplaceholder.typicode.com";
 const PICSUM_BASE = "https://picsum.photos";
 const THUMBNAIL_SIZE = "160/160"
+const FULLPHOTO_SIZE = "900/650";
 const PHOTO_LIMIT = 20;
 
 async function getJson<T>(path: string): Promise<T> {
@@ -22,6 +23,13 @@ async function getJson<T>(path: string): Promise<T> {
 export const picsumThumb = (seed: number) =>
     `${PICSUM_BASE}/seed/${seed}/${THUMBNAIL_SIZE}`;
 
+export const picsumFull = (seed: number) =>
+    `${PICSUM_BASE}/seed/${seed}/${FULLPHOTO_SIZE}`;
+
 export function fetchPhotos() {
     return getJson<Photo[]>(`/photos?_limit=${PHOTO_LIMIT}`);
+}
+
+export function fetchPhoto(id: number) {
+    return getJson<Photo>(`/photos/${id}`);
 }

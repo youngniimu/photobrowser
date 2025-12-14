@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchPhotos, type Photo } from "../api";
 
-export function useAllPhotos() {
+export function useAllPhotos(page: number) {
     const [photos, setPhotos] = useState<Photo[]>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -12,7 +12,7 @@ export function useAllPhotos() {
         setLoading(true);
         setError(null);
 
-        fetchPhotos()
+        fetchPhotos(page)
             .then((data) => {
                 if (!cancelled) setPhotos(data);
             })
@@ -26,7 +26,7 @@ export function useAllPhotos() {
         return () => {
             cancelled = true;
         };
-    }, []);
+    }, [page]);
 
     return { photos, loading, error };
 }

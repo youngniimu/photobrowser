@@ -6,19 +6,24 @@ type ThumbnailProps = {
 }
 
 const Thumbnail = ({ photo }: ThumbnailProps) => {
-    return <Link
-        key={photo.id}
-        to={`/photos/${photo.id}`}
-    >
-        <img
-            src={picsumThumb(photo.id)}
-            alt={photo.title}
-            className="h-40 w-full rounded-lg"
-        />
-        <div className="text-xs">
-            {photo.title}
-        </div>
-    </Link>
+    return (
+        <Link
+            to={`/photos/${photo.id}`}
+            className="group relative block"
+        >
+            <img
+                src={picsumThumb(photo.id)}
+                className="h-40 w-full rounded-lg object-cover"
+            />
+            <div className="pointer-events-none absolute inset-0 flex items-end p-2 opacity-0 transition-opacity group-hover:opacity-100">
+                <div className="w-full rounded-lg bg-black/70 px-3 py-2 text-white">
+                    <div className="text-sm font-semibold leading-tight">
+                        {photo.title}
+                    </div>
+                </div>
+            </div>
+        </Link>
+    );
 }
 
 export default Thumbnail

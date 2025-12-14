@@ -7,7 +7,7 @@ export function usePhotoDetails(photoId: number | null) {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        if (photoId == null || !Number.isFinite(photoId)) {
+        if (!photoId) {
             setError("Invalid photo id");
             return;
         }

@@ -4,7 +4,7 @@ const GeneralErrror = () => {
             <div className="text-8xl font-extrabold text-red-600">✕</div>
             <div className="text-2xl font-semibold">Something went wrong</div>
             <div className="text-sm text-gray-600">
-                We&apos;re terribly sorry. Please refresh the page and try again.
+                We're terribly sorry. Please refresh the page and try again.
             </div>
         </div>
     );

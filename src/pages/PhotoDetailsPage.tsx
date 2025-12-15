@@ -1,9 +1,10 @@
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { picsumFull, } from "../api";
 import { usePhotoDetails } from "../hooks/usePhotoDetails";
 import GeneralErrror from "../components/GeneralError";
 
 const PhotoDetailsPage = () => {
+    const navigate = useNavigate();
     const { id } = useParams<{ id: string }>();
     const { photo, loading, error } = usePhotoDetails(Number(id));
 
@@ -13,12 +14,16 @@ const PhotoDetailsPage = () => {
 
     return (
         <div className="relative h-screen w-screen overflow-hidden">
-            <Link
-                to="/"
+            <button
+                type="button"
+                onClick={() => {
+                    if (window.history.length > 1) navigate(-1);
+                    else navigate("/");
+                }}
                 className="absolute left-4 top-4 z-10 rounded-md bg-black/60 px-3 py-1.5 text-sm text-white"
             >
                 ← Back
-            </Link>
+            </button>
 
             {loading && (
                 <>

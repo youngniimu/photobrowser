@@ -15,9 +15,9 @@ const Thumbnail = ({ photo }: ThumbnailProps) => {
                 src={picsumThumb(photo.id)}
                 className="h-40 w-full rounded-lg object-cover"
             />
-            <div className="pointer-events-none absolute inset-0 flex items-end p-2 opacity-0 transition-opacity group-hover:opacity-100">
+            <div className="absolute inset-0 flex items-end p-2 opacity-0 transition-opacity group-hover:opacity-100">
                 <div className="w-full rounded-lg bg-black/70 px-3 py-2 text-white">
-                    <div className="text-sm font-semibold leading-tight">
+                    <div className="text-sm font-semibold">
                         {photo.title}
                     </div>
                 </div>

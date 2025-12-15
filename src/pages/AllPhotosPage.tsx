@@ -1,11 +1,22 @@
-import { useState } from "react";
 import { useAllPhotos } from "../hooks/useAllPhotos";
 import Thumbnail from "../components/Thumbnail";
 import AllPhotosHeader from "../components/AllPhotosHeader";
 import GeneralErrror from "../components/GeneralError";
+import { useSearchParams } from "react-router-dom";
 
 const AllPhotosPage = () => {
-    const [page, setPage] = useState(1);
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const page = Math.max(1, Number(searchParams.get("page")) || 1);
+
+    const setPage = (nextPage: number) => {
+        setSearchParams((prev) => {
+            const p = new URLSearchParams(prev);
+            p.set("page", String(Math.max(1, nextPage)));
+            return p;
+        });
+    };
+
     const { photos, loading, error } = useAllPhotos(page);
 
     if (error) {
@@ -16,8 +27,8 @@ const AllPhotosPage = () => {
         <div className="mx-auto max-w-6xl p-4">
             <AllPhotosHeader
                 page={page}
-                onPrev={() => setPage((p) => Math.max(1, p - 1))}
-                onNext={() => setPage((p) => p + 1)}
+                onPrev={() => setPage(page - 1)}
+                onNext={() => setPage(page + 1)}
             />
             <div className="mt-3 grid grid-cols-2 gap-3 md:grid-cols-4">
                 {loading
